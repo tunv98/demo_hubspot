@@ -3,51 +3,18 @@ require('dotenv').config({path: '.env'});
 const Hubspot = require('hubspot');
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY})
 const { console } = require('stringify-log');
+const { FORM_FIELD_GROUPS, SUBMIT_TEXT, STYLE, INLINE_MESSAGE, METADATA } = require("../controllers/utilities")
 
 const createNewForm = (req, res) => {
   const formPayload = {
-    name: 'NEW FORM 1',
-    submitText: 'Submit',
-    inlineMessage: `<p>Thanks for submitting the form. </p>
-    Please wait for page refresh.
-    If page not refreshed automatically please refresh it manually`,
-    formFieldGroups: [
-      {
-        fields: [
-          {
-            name: 'firstname',
-            label: 'First name',
-            defaultValue: '',
-            placeholder: 'Enter first name',
-            type: 'string',
-            hidden: false,
-            enabled: true
-          },
-          {
-            name: 'lastname',
-            label: 'Last name',
-            defaultValue: '',
-            placeholder: 'Enter Last name',
-            type: 'string',
-            hidden: false,
-            enabled: true
-          }
-        ]
-      },
-      {
-        fields: [
-          {
-            name: 'email',
-            label: 'Email',
-            defaultValue: '',
-            placeholder: 'Enter Email',
-            type: 'string',
-            hidden: false,
-            enabled: true
-          },
-        ]
-      }
-    ],
+    name: 'NEW FORM 3',
+    cssClass: "hs-form stacked",
+    submitText: SUBMIT_TEXT,
+    themeName: "canvas",
+    formFieldGroups: FORM_FIELD_GROUPS,
+    inlineMessage: INLINE_MESSAGE,
+    metaData: METADATA,
+    style: STYLE
   }
   return hubspot.forms.create(formPayload)
     .then((rs) => {
